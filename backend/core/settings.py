@@ -20,17 +20,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-e3=!tw9m3l0=g%d=zqha9sqgw1xprptncqjt_9piasp%y6n7gm"
+# SECRET_KEY = "django-insecure-e3=!tw9m3l0=g%d=zqha9sqgw1xprptncqjt_9piasp%y6n7gm"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 
-ALLOWED_HOSTS = [
-    '56.228.24.118',
-    'localhost',
-    '127.0.0.1',   
-    ]
-
+# ALLOWED_HOSTS = [
+#     '56.228.24.118',
+#     'localhost',
+#     '127.0.0.1',   
+#     ]
+import os
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
+DEBUG = os.getenv("DEBUG", "0") in {"1","true","True","YES","yes"}
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS","127.0.0.1,localhost").split(",")]
+AWS_REGION = os.getenv("AWS_REGION", "ap-north-1")
+SQS_QUEUE_URL = os.getenv("SQS_QUEUE_URL", "")
 
 # Application definition
 
