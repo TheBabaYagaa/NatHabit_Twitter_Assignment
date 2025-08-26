@@ -7,12 +7,18 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .models import Follow
+from django.shortcuts import redirect
+from django.views import View
 # from common.aws import send_follow_event
 
 # Create your views here.
 
 User = get_user_model()
 
+class RootRedirectView(View):
+    def get(self, request):
+        return redirect('api/auth/login/')
+    
 class SignupView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     def post(self, request):

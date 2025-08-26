@@ -21,8 +21,10 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from users.views import RootRedirectView
 
 urlpatterns = [
+    path('', RootRedirectView.as_view()),
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
     path('api/', include('tweets.urls')),
