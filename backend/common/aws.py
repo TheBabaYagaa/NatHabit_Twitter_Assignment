@@ -11,6 +11,7 @@ def sqs_client():
 
 def send_follow_event(follower_id: int, following_id: int, recipient_email: str | None = None):
     url = os.getenv("SQS_QUEUE_URL", "")
+    
     if not url:
         return
     attrs = {

@@ -92,6 +92,7 @@ class FollowView(APIView):
             following=target,
         )
         if created:
+            # print("reached")
             send_follow_event(request.user.id,target.id,recipient_email=target.email)
             return Response({"detail": "Followed"}, status=status.HTTP_201_CREATED)
         return Response({"detail": "Already following"}, status=status.HTTP_200_OK)

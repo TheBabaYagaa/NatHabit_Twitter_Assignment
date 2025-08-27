@@ -13,11 +13,21 @@ staticfiles/
 .venv/
 venv/
 backend/.venv/
+backend/.env.example
+
+# terraform
+infra/terraform/.terraform
+infra/terraform/.terraform.lock.hcl
+infra/terraform/terraform.tfstate*
+
+
 
 # Env & secrets
 .env
 .env.*.local
 backend/.env
+terraform.auto.tfvars
+terraform.tfvars
 *.pem
 *.key
 
@@ -35,3 +45,5 @@ dist/
 .vscode/
 .idea/
 .DS_Store
+
+ 

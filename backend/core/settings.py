@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = "django-insecure-e3=!tw9m3l0=g%d=zqha9sqgw1xprptncqjt_9piasp%y6n7gm"
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = False
 
 # ALLOWED_HOSTS = [
 #     '56.228.24.118',
@@ -32,11 +32,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #     ]
 import os
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
-DEBUG = os.getenv("DEBUG", "0") in {"1","true","True","YES","yes"}
+
 ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS","127.0.0.1,localhost").split(",")]
 AWS_REGION = os.getenv("AWS_REGION", "eu-north-1")
 SQS_QUEUE_URL = os.getenv("SQS_QUEUE_URL", "")
-SENDER_MAIL = os.getenv("SENDER_MAIL","madanpratap2017137@gmail.com")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+SENDER_EMAIL = os.getenv("SENDER_MAIL","madanpratap2017137@gmail.com")
 DEFAULT_RECIPIENT = os.getenv("DEFAULT_RECIPIENT","madanpratap2017137@gmail.com")
 EMAIL_TEMPLATE = os.getenv("EMAIL_TEMPLATE", "User follower mail")
 
