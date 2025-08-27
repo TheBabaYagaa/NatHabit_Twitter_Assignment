@@ -1,10 +1,15 @@
 import os
 import boto3
-from django.conf import settings
-REGION = settings.AWS_REGION
-SENDER_EMAIL = settings.SENDER_MAIL
-DEFAULT_RECIPIENT = settings.DEFAULT_RECIPIENT
-EMAIL_TEMPLATE = settings.EMAIL_TEMPLATE
+import logging 
+
+logger = logging.getLogger() 
+logger.setLevel(logging.INFO)
+
+REGION = os.environ.get("AWS_REGION", "eu-north-1")
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
+DEFAULT_RECIPIENT = os.environ.get("DEFAULT_RECIPIENT")
+EMAIL_TEMPLATE = os.environ.get("EMAIL_TEMPLATE", "User {follower_id} followed user {following_id}")
+
 
 ses = boto3.client("ses", region_name=REGION)
 
@@ -17,7 +22,7 @@ def handler(event, context):
         # Prefer recipient provided by the app (the “following” user’s email)
         recipient = _get(attrs, "recipient") or DEFAULT_RECIPIENT or SENDER_EMAIL
 
-        subject = f"New Follwer mail"
+        subject = f"New Follwer email"
         body_txt = EMAIL_TEMPLATE.format(follower_id=follower_id, following_id=following_id)
 
         try:
