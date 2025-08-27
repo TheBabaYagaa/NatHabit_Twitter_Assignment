@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Follow
 from django.shortcuts import redirect
 from django.views import View
-# from common.aws import send_follow_event
+from common.aws import send_follow_event
 
 # Create your views here.
 
@@ -92,8 +92,8 @@ class FollowView(APIView):
             following=target,
         )
         if created:
-            send_follow_event(request.user.id,target.id)
-        return Response({"detail": "Followed"}, status=status.HTTP_201_CREATED)
+            send_follow_event(request.user.id,target.id,recipient_email=target.email)
+            return Response({"detail": "Followed"}, status=status.HTTP_201_CREATED)
         return Response({"detail": "Already following"}, status=status.HTTP_200_OK)
 
     def delete(self, request, id):
