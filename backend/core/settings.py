@@ -36,6 +36,9 @@ DEBUG = os.getenv("DEBUG", "0") in {"1","true","True","YES","yes"}
 ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS","127.0.0.1,localhost").split(",")]
 AWS_REGION = os.getenv("AWS_REGION", "ap-north-1")
 SQS_QUEUE_URL = os.getenv("SQS_QUEUE_URL", "")
+SENDER_MAIL = os.getenv("SENDER_MAIL","madanpratap2017137@gmail.com")
+DEFAULT_RECIPIENT = os.getenv("DEFAULT_RECIPIENT","madanpratap2017137@gmail.com")
+EMAIL_TEMPLATE = os.getenv("EMAIL_TEMPLATE", "User follower mail")
 
 # Application definition
 

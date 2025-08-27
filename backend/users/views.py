@@ -92,8 +92,8 @@ class FollowView(APIView):
             following=target,
         )
         if created:
-            # send_follow_event(request.user.id,target.id)
-            return Response({"detail": "Followed"}, status=status.HTTP_201_CREATED)
+            send_follow_event(request.user.id,target.id)
+        return Response({"detail": "Followed"}, status=status.HTTP_201_CREATED)
         return Response({"detail": "Already following"}, status=status.HTTP_200_OK)
 
     def delete(self, request, id):
