@@ -1,5 +1,6 @@
 
-#  Local Setup Guide (Django + MySQL)
+
+#  Local Setup Guide 
 Follow these steps to run the project locally:
 ## 1. Clone the Repository
 git clone https://github.com/TheBabaYagaa/NatHabit_Twitter_Assignment.git
@@ -7,11 +8,12 @@ cd NatHabit_Twitter_Assignment
 ## 2. Create Virtual Environment
 # Create venv
 python3 -m venv venv
-# Activate venv
-# (Linux/Mac)
+# Activate venv(OS)
 source venv/bin/activate
-# (Windows - Git Bash/PowerShell)
-venv\Scripts\activate
+
+# (Windows - powershell)
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.venv\Scripts\Activate.ps1
 ## 3. Setup Environment Variables
 cd backend
 ## 4. Install Dependencies
@@ -27,13 +29,15 @@ python manage.py migrate
  zip function.zip lambda_function.py
  terraform init
  terraform apply
+ 
 ## 6. Create Superuser (Admin Login)
 python manage.py createsuperuser
+
 ## 7. Run the Development Server
 python manage.py runserver
 The app will now be available at:
-n http://127.0.0.1:8000/
-n That’s it! You can now develop and test the app locally.
+ http://127.0.0.1:8000/
+
 
 
 #  Deploying Django App on AWS EC2 (Gunicorn + Nginx)
