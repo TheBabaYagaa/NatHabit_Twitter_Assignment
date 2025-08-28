@@ -27,7 +27,7 @@ infra/terraform/terraform.tfstate*
 .env.*.local
 backend/.env
 terraform.auto.tfvars
-terraform.tfvars
+*terraform.tfvars
 *.pem
 *.key
 
