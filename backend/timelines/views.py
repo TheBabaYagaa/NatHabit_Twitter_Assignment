@@ -2,6 +2,7 @@
 from rest_framework import generics, permissions
 from django.db.models import Count, Q
 from tweets.models import Tweet
+from users.models import Follow
 from tweets.serializers import TweetSerializer 
 
 class TimelineView(generics.ListAPIView):
@@ -11,22 +12,19 @@ class TimelineView(generics.ListAPIView):
     def get_queryset(self):
         u = self.request.user
 
-        include_self = self.request.query_params.get("include_self", "").lower() in {"1", "true", "yes"}
 
-       
-        following_ids = u.following.values_list("id", flat=True)
+     
+        following_ids = Follow.objects.filter(follower=u).values_list("following_id", flat=True)
 
-        author_filter = Q(author_id__in=following_ids)
-        if include_self:
-            author_filter |= Q(author_id=u.id)
+
 
         return (
             Tweet.objects
-                 .select_related("author")
-                 .filter(author_filter)
-                 .annotate(
-                     likes_count=Count("likes", distinct=True),
-                     comments_count=Count("comments", distinct=True),
-                 )
-                 .order_by("-created_at")
+                .select_related("author")
+                .filter(author_id__in=following_ids)
+                .annotate(
+                    likes_count=Count("likes", distinct=True),
+                    comments_count=Count("comments", distinct=True),
+                )
+                .order_by("-created_at")
         )

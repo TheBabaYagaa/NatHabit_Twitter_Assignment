@@ -108,7 +108,7 @@ class FollowView(APIView):
             following=target,
         ).delete()
         if deleted:
-            return Response({"detail": "Unfollowed"}, status=status.HTTP_204_NO_CONTENT)
+            return Response({"detail": "Unfollowed"}, status=status.HTTP_200_OK)
         return Response({"detail": "Not following"}, status=status.HTTP_404_NOT_FOUND)
 
 
